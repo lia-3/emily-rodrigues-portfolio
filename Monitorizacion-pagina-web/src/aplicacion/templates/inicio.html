@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-light p-5 rounded-lg">
+    <h1 class="display-4">Bienvenido a TiERSS</h1>
+    <p class="lead">Los mejores productos al mejor precio</p>
+    <a href="{{ url_for('mostrar_productos') }}" class="btn btn-primary btn-lg">Ver productos</a>
+</div>
+
+<h2 class="my-4">Productos destacados</h2>
+<div class="row">
+    {% for producto in productos_destacados %}
+    <div class="col-md-3 mb-4">
+        <div class="card h-100">
+            <img src="{{ url_for('static', filename=producto.img) }}" class="card-img-top" alt="{{ producto.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text text-truncate">{{ producto.descripcion }}</p>
+                <p class="font-weight-bold">${{ "%.2f"|format(producto.precio) }}</p>
+                <span class="badge bg-{{ 'success' if producto.stock > 0 else 'danger' }}">
+                    {{ 'Disponible' if producto.stock > 0 else 'Agotado' }}
+                </span>
+            </div>
+            <div class="card-footer bg-white">
+                <a href="{{ url_for('agregar_al_carrito', producto_id=producto.id) }}" 
+                   class="btn btn-primary btn-sm w-100 {{ 'disabled' if producto.stock <= 0 }}">
+                    Añadir al carrito
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

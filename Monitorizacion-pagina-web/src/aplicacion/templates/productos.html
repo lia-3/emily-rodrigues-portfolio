@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Nuestros Productos</h1>
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="{{ url_for('static', filename=producto.img) }}" class="card-img-top" alt="{{ producto.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <p class="font-weight-bold">${{ "%.2f"|format(producto.precio) }}</p>
+                <p>Stock: {{ producto.stock }} unidades</p>
+            </div>
+            <div class="card-footer bg-white">
+                <a href="{{ url_for('agregar_al_carrito', producto_id=producto.id) }}" 
+                   class="btn btn-primary {{ 'disabled' if producto.stock <= 0 }}">
+                    {{ 'Añadir al carrito' if producto.stock > 0 else 'Sin stock' }}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
