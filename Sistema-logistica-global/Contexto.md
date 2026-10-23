@@ -1,11 +1,11 @@
 # Sistema de Gestión de Contenedores y Logística
 
 ## Contexto del Proyecto
-Este proyecto fue desarrollado en equipo como parte de la asignatura de **Programación Orientada a Objetos (POO)** del **Grado en Ingeniería Informática de la Universidad de Valladolid (UVa)** (Curso 2024-2025).
+Este proyecto fue desarrollado en equipo como parte de la asignatura de **Programación Orientada a Objetos (POO)
 
 * **Autoras:** 
   * Marta Pérez
-  * Emily Rodriges
+  * Emily Rodrigues
 
 ---
 

@@ -1,7 +1,7 @@
 # Sistema de Alquiler de Bicicletas y Movilidad Urbana 
 
 ## Contexto del Proyecto
-Este proyecto fue desarrollado en equipo como parte de la asignatura de **Tecnologías para el Desarrollo de Software (TDS)** del **Grado en Ingeniería Informática de la Universidad de Valladolid (UVa)** (Curso 2024-2025).
+Este proyecto fue desarrollado en equipo como parte de la asignatura de **Tecnologías para el Desarrollo de Software (TDS)** 
 
 - **Autores:**
   * Emily Rodrigues
