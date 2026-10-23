@@ -36,7 +36,7 @@ El desarrollo y el diseño del marco experimental abarcaron los siguientes pilar
 
 ---
 
-## 📂 Estructura y Uso del Repositorio
+## Estructura y Uso del Repositorio
 - `src/`: Código fuente de la arquitectura modular (`Contenedor.java`, `IMedicion.java`, `FuerzaBruta.java`, `Voraz.java`, `ProgramacionDinamica.java`, `Main.java`)
 - `inputs/`: Organización jerárquica de archivos de prueba:
   * `analisis/`: Casos divididos en subdirectorios por algoritmo, número de atributos ($n$) y cantidad de contenedores ($k$)
