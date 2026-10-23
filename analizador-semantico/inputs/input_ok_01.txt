@@ -1,0 +1,130 @@
+class Asignatura {
+	attribute codigo identity: Integer; 
+	attribute nombre: String;
+	attribute creditos: Integer;
+	attribute acronimo: String;
+	attribute duracion: DuracionAsignatura;
+	attribute tipo: TipoAsignatura;
+	attribute esCuatrimestral: Boolean;
+}
+
+class PlanDeEstudios {
+	attribute codigo identity: Integer; 
+	attribute nivel: String;
+	attribute idiomas: String;
+	attribute creditos: Integer;
+	attribute tipo: TipoEnsennanza;
+	attribute duracion: Integer;
+	attribute plazas: Integer;
+}
+
+class AreaDeConocimiento {
+	attribute siglas identity: String;
+	attribute nombre: String;
+}
+
+class Profesor {
+	attribute nif identity: String;
+	attribute nombre: String;
+	attribute apellidos: String;
+	attribute telefono: String;
+	attribute correo: String;
+	attribute dedicacionEnPeriodo: Integer;
+}
+
+class AsignaturaEnPlan {
+	attribute tipo: TipoAsignatura;
+	attribute cursoAlQueSeAsocia: Integer;
+	attribute periodoEnElQueSeImparte: Periodo;
+}
+
+association {
+    name = RelacionAsignaturaPlan
+    target = Asignatura 1..* -asignaturas {unique}
+    target = PlanDeEstudios 1..* -planes
+}
+
+association {
+	name = AsignacionAreaAsignaturaEnPlan
+	target = AsignaturaEnPlan 1 -asignatura
+	target = AreaDeConocimiento 1 -area
+	with association class {
+		attribute porcentaje: Integer;
+	}
+}
+
+association {
+	name = ProfesorPreviamenteEnArea
+	target = Profesor 1 -profesor
+	target = AreaDeConocimiento 1 -area
+	with association class {
+		attribute dedicacionEnPeriodo: Integer;
+	}
+}
+
+enumeration DuracionAsignatura {
+	literal CUATRIMESTRAL;
+	literal ANUAL;
+}
+
+enumeration TipoAsignatura {
+	literal OBLIGATORIA;
+	literal BASICA;
+	literal OPTATIVA;
+}
+
+enumeration Periodo {
+	literal PRIMERCUATRIMESTRE;
+	literal SEGUNDOCUATRIMESTRE;
+	literal ANUAL;
+}
+
+enumeration TipoEnsennanza {
+	literal PRESENCIAL;
+	literal VIRTUAL;
+}
+
+context Asignatura
+inv: self.esCuatrimestral=true implies
+(self.AsignaturaEnPlan.periodoEnElQueSeImparte=Periodo::PRIMERCUATRIMESTRE or
+ self.AsignaturaEnPlan.periodoEnElQueSeImparte=Periodo::SEGUNDOCUATRIMESTRE)
+inv: self.esCuatrimestral=false implies
+(self.AsignaturaEnPlan.periodoEnElQueSeImparte=Periodo::ANUAL)
+
+context Asignatura
+inv: self.AsignaturaEnPlan.AsignacionAreaAsignaturaEnPlan.porcentaje->sum()=100
+
+context AsignaturaEnPlan
+inv: (self.tipo=TipoAsignatura::BASICA or self.tipo=TipoAsignatura::OBLIGATORIA)
+implies self.grupos.tipo->select(t | t = TipoGrupo::TEORIA)->size()>=1
+inv: (self.tipo=TipoAsignatura::BASICA or self.tipo=TipoAsignatura::OBLIGATORIA)
+implies self.grupos.tipo->select(t | t = TipoGrupo::PRACTICAS)->size()>=1
+inv: self.tipo=TipoAsignatura::OPTATIVA and
+(self.grupos.curso.fechadeInicio.getYear()=(LocalDate.Now.getYear()-1)
+and self.grupos.estudiantes->size()<5) implies
+(self.grupos.curso.fechadeInicio.getYear()=(LocalDate.Now.getYear())
+and self.grupos->size()>=0)
+
+context AsignaturaEnPlan
+inv: self.periodoEnElQueSeImparte=Periodo::ANUAL implies (self.grupos.profesores->size()>0 and
+(LocalDate.Now.isBefore(self.grupos.curso.fechadeInicio)))
+inv: self.periodoEnElQueSeImparte=Periodo::PRIMERCUATRIMESTRE implies (self.grupos.profesores->size()>0 and
+(LocalDate.Now.isBefore(self.grupos.curso.fechadeInicio)))
+inv: self.periodoEnElQueSeImparte=Periodo::SEGUNDOCUATRIMESTRE implies self.grupos.profesores->size()>0 and
+(LocalDate.Now.isBefore(self.grupos.curso.fechadeInicioSegundoCuatrimestre))
+
+context Profesor
+inv: self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo >= 0
+and self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo <= 100
+inv: self.grupos.asignatura.periodo=Periodo::PRIMERCUATRIMESTRE implies self.horas->size() =
+(6*(self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo/100))
+inv: self.grupos.asignatura.periodo=Periodo::SEGUNDOCUATRIMESTRE implies self.horas->size() =
+(6*(self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo/100))
+
+context Profesor
+inv: self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo >= 0
+and self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo <= 100
+inv: self.grupos.asignatura.periodo=Periodo::PRIMERCUATRIMESTRE implies self.horas->size() =
+(6*(self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo/100))
+inv: self.grupos.asignatura.periodo=Periodo::SEGUNDOCUATRIMESTRE implies self.horas->size() =
+(6*(self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo/100))

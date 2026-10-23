@@ -1,0 +1,11 @@
+# Archivos de compilación
+*.class
+
+# Archivos generados por ANTLR
+src/*.tokens
+src/*.interp
+src/bin/
+src/SimpleClassModel*.java
+
+# Archivos generados por traducción
+ModeloGenerado.java

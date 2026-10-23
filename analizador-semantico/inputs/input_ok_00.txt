@@ -1,0 +1,38 @@
+class Libro {
+	attribute isbn identity: String;
+	attribute titulo: String;
+	attribute anioPublicacion: Integer;
+	attribute genero: GeneroLibro;
+	attribute fecha: LocalDate;
+} 
+
+class Autor {
+	attribute id identity: Integer;
+	attribute nombre: String;
+	attribute nacionalidad: String;
+}
+
+association {
+	name = EscritoPor
+	target = Libro 1..* -libros
+	target = Autor 1..* -autores
+}
+
+enumeration GeneroLibro {
+	literal FICCION;
+	literal NOFICCION;
+	literal BIOGRAFIA;
+	literal TECNICO;
+}
+
+datatype LocalDate = {
+	field day: Integer;
+	field month: Integer;
+	field year: Integer;
+	static operation now(): LocalDate;
+	operation getYear(): Integer;
+	operation isBefore(other: LocalDate): Boolean;
+}
+
+context Libro
+inv: self.anioPublicacion >= 1450 and self.anioPublicacion <= LocalDate.now().getYear()
