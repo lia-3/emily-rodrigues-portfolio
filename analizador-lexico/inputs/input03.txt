@@ -1,0 +1,37 @@
+--RN01
+context Asignatura
+inv: self.esCuatrimestral = true implies (self.AsignaturaEnPlan.periodo::1oC) or
+(self.asignaturaEnPlan.periodo::2oC)
+inv: self.esCuatrimestral = false implies (self.AsignaturaEnPlan.periodo::Anual)
+--RN02
+context AsignacionAreaAsignaturaEnPlan
+inv: (self.porcentaje > 0) and (self.porcentaje <= 100)
+context AsignaturaEnPlan
+inv: self.Areas.AsignacionAreaAsignaturaEnPlan.porcentaje -> sum() = 100--RN03
+context AsignaturaEnPlan
+inv: (self.tipo::basica) or (self.tipo::obligatoria) implies
+(self.grupos.tipo::teoria -> notEmpty()) and (self.grupos.tipo::practicas -> notEmpty())
+inv: (self.tipo::optativa and self.grupos.curso.fechadeInicio@pre-1 and self.grupos.estudiantes.size() > 5)
+implies (self.grupos.tipo::teoria -> notEmpty()) and (self.grupos.tipo::practicas -> notEmpty())
+--RN04
+context AsignaturaEnPlan
+inv: (self.periodo::Anual) or (self.periodo::1oC) and
+self.AsignacionAreaAsignaturaEnPlan.curso::fechadeInicio = self.Areas.ProfesorPreviamenteEnArea.fechaInicial
+implies
+self.Areas.Profesores -> notEmpty()
+inv: (self.periodo::2oC) and
+self.AsignacionAreaAsignaturaEnPlan.curso::fechadeInicioSegundoCuatrimestre =
+self.Areas.ProfesorPreviamenteEnArea.fechaInicial implies
+self.Areas.Profesores -> notEmpty()--RN05
+context Profesor
+inv: (self.Asignacion.dedicacion > 0) and (self.Asignacion.dedicacion < 100)
+inv: (self.ProfesorPreviamenteEnArea.dedicacion > 0) and (self.ProfesorPreviamenteEnArea.dedicacion < 100)
+--El siguiente invariante acaba con una formula (6*(dedicacion/100) esto sirve tanto para tiempo completo como para
+tiempo parcial)
+inv: (self.horas.periodo = 1oC) or (self.horas.periodo = 2oC) implies
+(self.horas.horaFin - self.horas.horaInicio) -> sum() = 6*(self.ProfesorPreviamenteEnArea.dedicacion / 100)
+inv: (self.horas.periodo = Anual) implies (self.horas.horaFin - self.horas.horaInicio) -> sum() =
+12*(self.ProfesorPreviamenteEnArea.dedicacion / 100)
+--RN06
+context Departamento
+inv: self.areas.profesores.Asignacion.dedicacion/100 -> sum() = 15

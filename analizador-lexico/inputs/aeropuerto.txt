@@ -1,0 +1,31 @@
+-- Contexto unificado: Aeropuerto y sus relaciones
+context Aeropuerto
+
+-- Restriccion de unicidad para Aeropuerto
+inv: Aeropuerto.allInstances()->forAll(a | a <> self implies a.id <> self.id)
+
+-- Restriccion sobre vuelos con duracion mayor a 3 horas
+inv: self.vuelo->select(v: Vuelo | v.duracion > 3)->notEmpty()
+
+-- Restriccion de unicidad en LineaAerea
+inv: self.vuelos->forAll(v, w: Vuelo | v <> w implies v.id <> w.id)
+
+-- Restricciones sobre pasajeros
+context Pasajero
+inv: self.edad >= self.edadMinima
+inv: self.necesitaAsistencia implies self.edad < 18
+
+-- Restriccion sobre reservas en pasajeros
+context Pasajero::reservar(v: Vuelo)
+pre: v.maxPasajeros > v.pasajeros->size()
+post: v.pasajeros->includes(self)
+
+-- Restriccion sobre identificacion unica de vuelos
+context Vuelo
+inv: Vuelo.allInstances()->forAll(v, w | v <> w implies v.id <> w.id)
+
+-- Restriccion sobre duracion de vuelos
+inv: self.duracion > 0
+
+-- Restriccion sobre horario de vuelos
+inv: self.salida < self.llegada

@@ -1,0 +1,10 @@
+-- Hola esto es un comentario
+context Alumno::calificacionGlobal()
+pre: self.calificacionMotivacion -> max() >= 5
+     self.calificacionParcial -> count() =2
+inv: self.alias -> notEmpty() implies
+     self.alias -> includes(self.nombre) .max
+post:self.calificacionGlobal =
+     (2*(self.calificacionParcial -> at(1)) +
+     self.calificacionParcial -> at(2))/3
+     calificación

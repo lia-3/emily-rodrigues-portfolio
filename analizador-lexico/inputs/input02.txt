@@ -1,0 +1,29 @@
+
+Context Asignatura
+Inv : self.esCuatrimestral implies (self.AsignaturaEnPlan.Periodo = “1oC” or
+self.AsignaturaEnPlan.Periodo = “2oC”)) or (self.esCuatrimestral=False &&
+self.AsignaturaEnPlan.Periodo= “Anual”)
+
+Context AsignaturaEnPlan
+Inv: self.AsignacionAreaAsignaturaEnPlan.porcentaje->sum() = 100
+
+Context AsignaturaEnPlan
+Inv: self.tipo=’basica’ or self.tipo=’obligatoria’ implies (exists(self.Grupo.tipo=’teoria’ and
+self.Grupo.tipo=’practicas’))
+Inv: self.Grupo.curso.fechadeFin.isBefore(now()) and count(self.Grupo.estudiantes)>4 implies
+(exists(self.tipo=’optativa’)
+
+Context: Grupo
+Inv: : self.Curso.fechadeInicio >= LocalDate.now() implies (self.AsiganturaEnPlan.periodo =
+“Anual” or self.AsignaturaEnPlan.periodo= “1oC” implies self.profesor->notEmpty() ))
+Inv: : self.Curso.fechadeInicioSegundoCuatrimestre >= LocalDate.now() implies
+(self.AsignaturaEnPlan.periodo= “1oC” implies self.profesor->notEmpty())
+
+Context: Profesor
+Inv: self.asignacion.dedicacion <= 100 implies self.collect(self.horaFin.getHour() -
+self.horaInicio.getHour() )->sum() + self.collect( self.horaFin.getMinute()/60 - self.horaInicio.
+getMinute()/60)->sum() < 0,06 * self.asignacion.dedicacion
+
+Context: Departamento
+Inv: self.AreaDeConocimiento.Asignacion.dedicacion->sum() >= 1500
+Inv: self.AreaDeConocimiento.profesores>14
