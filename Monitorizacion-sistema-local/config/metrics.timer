@@ -1,0 +1,11 @@
+[Unit]
+Description=Run metrics script every second
+
+[Timer]
+OnBootSec=1s
+OnUnitActiveSec=1s
+AccuracySec=1ms
+
+[Install]
+WantedBy=timers.target
+

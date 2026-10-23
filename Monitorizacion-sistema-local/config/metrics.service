@@ -1,0 +1,6 @@
+[Unit]
+Description=Collect system metrics
+
+[Service]
+ExecStart=/home/usuario/erss/proyecto/con-shell/terminal.sh
+
