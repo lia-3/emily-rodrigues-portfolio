@@ -1,0 +1,130 @@
+--- Primera restricción:
+--- No se pueden crear incidencias de contratos que no se encuentran en activo.
+context LlamadaCorrecta::crearIncidencia()
+pre: self.contrato.activo
+
+
+--- Segunda restricción:
+--- Si un contrato ya no está en activo, se anota la fecha de fin de contrato.
+context Contrato: finalizarContrato()
+post: self.fechaFin = Fecha::now() and self.activo = false
+
+
+--- Tercera restricción:
+--- Los contratos de los clientes particulares comparten el mismo SLA.
+context ClienteParticular
+inv: self.contratos -> forAll(c1, c2 Contrato| c1 <> c2 implies c1.SLA = c2.SLA)
+
+
+
+--- Cuarta restricción:
+--- Los clientes particulares no contratan servicios avanzados mientras que los clientes 
+--- empresariales contratan servicios avanzados y básicos.
+context Contrato
+inv: self.cliente.oclIsKindOf(ClienteParticular)  implies self.serviciosContratados -> forAll(s.oclIsKindOf(ServicioBasicoContratado))
+inv: self.cliente.oclIsKindOf(ClienteEmpresarial) implies 
+                                                    (self.serviciosContratados->exists(s ServicioAvanzadoContratado | s.oclIsKindOf(ServicioAvanzadoContratado)) 
+                                                        and self.serviciosContratados->exists(s ServicioAvanzadoContratado | s.oclIsKindOf(ServicioBasicoContratado)))
+
+
+--- Quinta restricción:
+--- Si un coordinador es el responsable de atender una llamada es porque la llamada se 
+--- produce en su turno de trabajo.
+context Coordinador::atenderLlamada(ll: Llamada)
+pre: turnosCoordinador -> exists(tc: TurnoCoordinador | tc.fechaInicioTurno.esAnteriorOIgual(ll.fecha) 
+                                    and tc.fechaFinTurno.esPorterirorOIgual(ll.fecha) 
+                                    and tc.horario.enRangoHorario(ll.hora))
+
+
+--- Sexta restricción:
+--- No hay instrucciones ni operaciones remotas posteriores a una que haya resuelto la incidencia.
+context Incidencia::realizarAccionRemota(a : AccionRemota)
+pre: self.estado = EstadoIncidencia::sinResolver
+
+
+--- Séptima restricción:
+--- No se genera una orden del servicio si con instrucciones u operaciones remotas se ha 
+--- solucionado la incidencia.
+context Incidencia::generarOrdenServicio()
+pre: not(self.estado = EstadoIncidencia::resueltaRemotamente)
+
+
+--- Octava restricción:
+--- El vehículo asignado al técnico pertenece a la misma base.
+context Tecnico
+inv: self.vehiculo.base = self.base
+
+
+--- Novena restricción:
+--- La empresa necesita contar con al menos 2 técnicos disponibles por zona geográfica.
+context ZonaGeografica
+inv: bases.tecnicos -> select(t | t.cambiosDeSituacionTecnico -> last().estado 
+                                  = EstadoTecnico::disponible) -> size() >= 2
+
+
+--- Décima restricción:
+--- Se utilizan las mismas unidades de forma consistente cuando se refieren al mismo tipo de material
+context Material
+inv: forAll(m1, m2 | m1.tipo = m2.tipo implies m1.unidad = m2.unidad)
+
+
+--- Undécima restricción:
+--- Se crea una penalización si el tiempo total de resolución de una incidencia supera el tiempo máximo 
+--- de resolución del SLA correspondiente. El coste de la penalización es el establecido en dicho SLA.
+context Incidencia::crearPenalizacion(): Penalizacion
+pre: self.llamadaCorrecta.contrato.SLA.tiempoMaximoResolucionEnHoras < tiempoTotalResolucionEnMinutos / 60
+post: penalizacion.coste = self.llamadaCorrecta.contrato.SLA.penalizacionPorIncumplimiento
+
+
+--- Duodécima restricción:
+--- Tras finalizar un turno de trabajo, es obligatorio un período mínimo de descanso de 12 horas 
+--- antes de poder ser asignado nuevamente.
+context Coordinador::asignarTurno(t : TurnoCoordinador)
+pre:
+    self.turnosCoordinador -> notEmpty() 
+    implies
+        (self.turnosCoordinador -> last().fechaFin.sumarDias(1) < t.fechaInicioTurno)
+        or
+        (   self.turnosCoordinador -> last().fechaFin.sumarDias(1) = t.fechaInicioTurno
+            and
+            ((24 - self.turnosCoordinador -> last().horario.obtenerHoraFinTurno())+ t.horario.obtenerHoraInicioTurno()) >= 12
+        )
+        or
+        (   self.turnosCoordinador->last().fechaFin = t.fechaInicioTurno
+            and
+            (t.horario.obtenerHoraInicioTurno() - self.turnosCoordinador->last().horario.obtenerHoraFinTurno()) >= 12
+        )
+
+context Tecnico::asignarTurno(t : TurnoTecnico)
+pre:
+    self.turnosTecnico->notEmpty() 
+    implies
+        (self.turnosTecnico->last().fechaFin.sumarDias(1) < t.fechaInicioTurno)
+        or
+            (self.turnosTecnico->last().fechaFin.sumarDias(1) = t.fechaInicioTurno
+            and
+            ((24 - self.turnosTecnico->last().horaFin.obtenerHoraEntera()) + t.horaInicio.obtenerHoraEntera()) >= 12
+        )
+        or
+            (self.turnosTecnico->last().fechaFin = t.fechaInicioTurno
+            and
+            (t.horaInicio.obtenerHoraEntera() - self.turnosTecnico->last().horaFin.obtenerHoraEntera()) >= 12
+        )
+
+--- Las dos restricciones anteriores se basan en la idea de que:
+---     1. Si no tiene turnos, no hay problema y siempre puede aceptar cualquier turno
+---     2. Si entre el ultimo turno y el que se quiere asignar hay más de un día de diferencia, no hay problema
+---     3. Si la fecha de inicio del proximo turno es al dia siguiente del ultimo turno 
+---        (en otra palabras: fechaFinUltimoTurno + 1 dia = fechaInicioTurnoNuevo), hay que verificar con 
+---        (24 - horaFinUltimoTurno + horaInicioTurnoNuevo) >= 12
+---     4. Si termina un turno el mismo dia que empieza otro (en otra palabras: fechaFinUltimoTurno = fechaInicioTurnoNuevo)
+---        hay que verificar con (horaInicioTurnoNuevo - horaFinUltimoTurno) >= 12
+
+
+--- Decimotercera restricción:
+--- Si un parte indica que queda pendiente de segunda visita o necesita escalado a un técnico de nivel superior, la incidencia 
+--- tendrá acciones de servicio siguientes, la clase de servicio será consistente con esto y la fecha de creación de la acción 
+--- siguiente coincidirá con la del parte.
+context Incidencia
+inv: self.estado = (EstadoIncidencia::escaladaEspecialista or EstadoIncidencia::parcialmenteResuelta) implies 
+                    self.siguientes->first().fechaCreacion = self.ordenDeServicio.fechaEmision

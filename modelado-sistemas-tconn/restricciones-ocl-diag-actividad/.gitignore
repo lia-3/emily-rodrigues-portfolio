@@ -1,0 +1,12 @@
+source/*.ocl
+
+.vpprefdata/
+*.vpp~*
+*.vpp.working
+*.vpp.working-journal
+*.lock
+*.vpp.lck
+*.vpp.*
+*.working
+tmp/
+.vpprefdata/
