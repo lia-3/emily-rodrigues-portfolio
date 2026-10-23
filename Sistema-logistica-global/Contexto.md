@@ -1,4 +1,4 @@
-# Sistema de Gestión de Contenedores y Logística (POO)
+# Sistema de Gestión de Contenedores y Logística
 
 ## Contexto del Proyecto
 Este proyecto fue desarrollado en equipo como parte de la asignatura de **Programación Orientada a Objetos (POO)** del **Grado en Ingeniería Informática de la Universidad de Valladolid (UVa)** (Curso 2024-2025).
