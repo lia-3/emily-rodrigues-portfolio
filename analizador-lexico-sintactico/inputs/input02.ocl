@@ -1,0 +1,31 @@
+context Asignatura
+inv: self.esCuatrimestral = true implies
+self.AsignaturaEnPlan.periodo = Periodo::1oC or self.AsignaturaEnPlan.periodo = Periodo::2oC
+inv: self.esCuatrimestral = false implies self.AsignaturaEnPlan.periodo = Periodo::Anual
+
+context Asignatura
+inv:self.AsignaturaEnPlan.AsignacionAreaAsignaturaEnPlan.porcentaje >= 0 and
+self.AsignaturaEnPlan.AsignacionAreaAsignaturaEnPlan.porcentaje <=100
+inv: self.AsignaturaEnPlan.Areas->size() > 1 and self.AsignaturaEnPlan.porcentaje -> sum() =
+100
+
+context AsignaturaEnPlan
+inv: self.tipo = TipoAsignatura::basica or self.tipo = TipoAsignatura::obligatoria implies self.grupos.tipo
+= TipoGrupo::teoria -> notEmpty() and self.grupos.tipo = TipoGrupo::practicas-> notEmpty()
+inv: self.tipo = TipoAsignatura::optativa and
+(self.AsignacionAreaAsignaturaEnPlan.fechadeFin.until(self.AsignacionAreaAsignaturaEnPlan.fechadeInicio,
+DAYS) < 365 and self.grupos.estudiantes -> size() < 5) implies self.grupos-> isEmpty()
+
+context AsignaturaEnPlan
+inv: self.periodo=Periodo::Anual or self.periodo=Periodo::1oC implies (self.grupos.profesores->notEmpty()
+and self.AsignacionAreaAsignaturaEnPlan.curso.fechadeInicio.isAfter(LocalDate.now()) )
+inv: self.periodo=Periodo::2oC implies ( self.grupos.profesores->notEmpty() and
+self.AsignacionAreaAsignaturaEnPlan.curso.fechadeInicioSegundoCuatrimestre.isAfter(LocalDate.now()))
+
+context Profesor
+inv: self.Asignacion.dedicacion >=0 and self.Asignacion.dedicacion <=100
+inv:(self.horas.horaFin.difference(self.horas.horaInicio) ) -> sum() = (6 or
+self.Asignacion.ProfesorPreviamenteEnArea.dedicacionEnPeriodo)
+
+context Departamento
+inv: self.areas.Asignacion.profesores -> size() >=15

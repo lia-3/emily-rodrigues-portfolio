@@ -1,0 +1,80 @@
+context TurnoDeOperativo
+    inv: medicos->size() = conductores->size()
+    inv: medicos->forall(m | m.rolEnFecha(fechaCreacion).oclTypeOf(Medico) and m.rolEnFecha(fechaTurno).oclType(Medico))
+    inv: conductores->forall(c | c.rolEnFecha(fechaCreacion).oclTypeOf(Conductor) and c.rolEnFecha(fechaTurno).oclType(Conductor))
+
+context Operativo
+    inv: turno.medicos->includes(medico) and turno.conductores->includes(conductor)
+
+context TurnoDeOperativo
+    inv: operativos->forall(o1, o2: Operativo | o1 <> o2 implies (o1.medico<>o2.medico and o1.conductor<>o2.conductor) )
+
+context TurnoDeOperador
+    inv: fechaCreacion.until(fechaTurno, DAYS) >= 15
+    inv: TurnoDeOperador.allInstances()->forall(t1, t2: TurnoDeOperador | ( t1 <> t2 and ( t1.fechaTurno.get(ChronoField.ALIGNED_WEEK_OF_YEAR)=t2.fechaTurno.get(ChronoField.ALIGNED_WEEK_OF_YEAR) ) implies t1.fechaCreacion=t2.fechaCreacion)
+
+
+context Operativo::crea(m: Empleado, c: Empleado, v: Vehículo, t: TurnoDeOperativo, b: Consultorio): void
+    pre: m <> null and c <> null and v <> null and t <> null and b <> null
+    pre: LocalDate.now().until(t.fechaTurno, DAYS) = 7
+    …
+    pre: v.estado = EstadoDeVehiculo::enServicio
+    pre: m.situaciones->last().oclType() <> DeBaja and m.situaciones->last().oclType() <> DeVacaciones
+    …
+  post: fechaCreacion = LocalDate.now() and medico = m and conductor = c and vehiculo = v and turno = t and base = b
+  post: estado = EstadoDeOperativo::bloqueado
+
+
+context NoCritica
+	inv: esLeve = consejos->exists(c | c.soluciona)
+	inv: requiereOperativo->notEmpty() implies not esLeve
+
+
+context RequiereOperativo::crea(d: Dirección, nc: NoCritica, o: Operativo): void
+    pre: d <> null and nc <> null and o <> null
+    pre: not nc.esLeve
+
+
+context RequiereOperativo::crea(d: Dirección, nc: NoCritica, o: Operativo): void
+    pre: d <> null and nc <> null and o <> null
+    pre: not nc.esLeve
+    …
+    pre: o.enTurno(LocalDate.now(), LocalTime.now()) and o.estado = EstadoDeOperativo::disponible and o.base.asignados->exists(o1 | o <> o1 and o1.estado= EstadoDeOperativo::disponible) and Operativo.allInstances()->select(o2: Operativo | o <> o2 and o2.turno = o.turno and o2.estado = EstadoDeOperativo::disponible)->size() >= 5
+
+    post: dirección = d and noCritica = nc and operativo = o
+    post: operativo.estado = EstadoDeOperativo::activado
+    post: activación.fecha = LocalDate.now() and activación.hora = LocalTime.now()
+
+
+context SeHaceCargoMedico
+    inv: procedimientos->forall(p1, p2: Procedimiento | p1 <> p2 implies not p1.descrito.esIncompatibleCon(p2.descrito) )
+
+context SeHaceCargoMedico::añadeProcedimientoAplicado(nuevo: Procedimiento): void
+    pre: nuevo <> null and procedimientos->forall (p: Procedimiento | p <> nuevo and not p.descrito.esIncompatible(nuevo.descrito) )
+
+
+context Empleado
+    inv: turnosMedicos.fechaTurno.intersection(turnosConductores.fechaTurno)->empty()
+    inv: turnosDeOperador.fechaTurno.intersection(turnosMedicos.fechaTurno)->empty()
+    inv: turnosDeOperador.fechaTurno.intersection(turnosConductores.fechaTurno)->empty()
+
+
+context  RequiereOperativo
+    inv: activación.fecha.atTime(activacion.hora).isAfter(noCritica.fechaInicio.atTime(noCritica.horaInicio))
+    inv: cierre.fecha.atTime(cierre.hora).isAfter(activación.fecha.atTime(activacion.hora))
+
+
+context SeHaceCargoMedico
+    inv: activación.fecha.atTime(activacion.hora).isBefore(fecha.atTime(hora))
+    inv: activacion.requiereOperativo.noCritica.fechaFin.atTime(activacion.requiereOperativo.noCritica.horaFin).equals(fecha.atTime(hora))
+    inv: fecha.atTime(hora).isBefore(activacion.requiereOperativo.cierre.fecha.atTime(activacion.requiereOperativo.cierre.hora))
+
+
+context DecideTrasladoAHospital
+    inv: fecha.atTime(hora).isAfter(seHaceCargoMedico.fecha.atTime(seHaceCargoMedico.hora))
+    inv: fecha.atTime(hora).isBefore(seHaceCargoMedico.activacion.requiereOperativo.cierre.fecha.atTime(seHaceCargoMedico.activacion.requiereOperativo.cierre.hora))
+
+
+context Procedimiento
+    inv: fechaInicio.atTime(horaInicio).isAfter(seHaceCargoMedico.fecha.atTime(seHaceCargoMedico.hora))
+    inv: fechaInicio.atTime(horaInicio).isBefore(seHaceCargoMedico.activacion.requiereOperativo.cierre.fecha.atTime(seHaceCargoMedico.activacion.requiereOperativo.cierre.hora))

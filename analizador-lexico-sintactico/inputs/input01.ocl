@@ -1,0 +1,45 @@
+context Asignatura
+inv: self.esCuatrimestral=true implies
+(self.AsignaturaEnPlan.periodo=Periodo::1oC or
+self.AsignaturaEnPlan.periodo=Periodo::2oC)
+inv: self.esCuatrimestral=false implies
+(self.AsignaturaEnPlan.periodo=Periodo::Anual)
+
+context Asignatura
+inv:
+self.AsignaturaEnPlan.AsignacionAreaAsignaturaEnPlan.porcentaje->sum()
+=100
+
+context AsignaturaEnPlan
+inv: ( self.tipo=TipoAsignatura::basica or self.tipo=TipoAsignatura::obligatoria)
+implies self.grupos.tipo=TipoGrupo::teoria->size()>=1
+inv: ( self.tipo=TipoAsignatura::basica or self.tipo=TipoAsignatura::obligatoria)
+implies self.grupos.tipo=TipoGrupo::practicas->size()>=1
+inv: self.tipo=TipoAsignatura::optativa and
+(self.grupos.curso.fechadeInicio.getYear().isEqual(LocalDate.Now.getYear()-1)
+and self.grupos.estudiantes->size()<5) implies
+(self.grupos.curso.fechadeInicio.getYear().isEqual(LocalDate.Now.getYear())
+and self.grupos->size()>=0)
+
+
+context AsignaturaEnPlan
+inv: self.periodo=Periodo::Anual implies (self.grupos.profesores->size()>0 and
+(LocalDate.Now isBefore(self.grupos.curso.fechadeInicio)))
+inv: self.periodo=Periodo::1oC implies (self.grupos.profesores->size()>0 and
+(LocalDate.Now isBefore(self.grupos.curso.fechadeInicio)))
+inv: self.periodo=Periodo::2oC implies self.grupos.profesores->size()>0 and
+(LocalDate.Now
+isBefore(self.grupos.curso.fechadeInicioSegundoCuatrimestre))
+
+context Profesor
+inv: self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo >= 0
+and self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo <= 100
+inv: self.grupos.asignatura.periodo=Periodo::1oC implies self.horas->size() =
+(6*(self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo/100))
+inv: self.grupos.asignatura.periodo=Periodo::2oC implies self.horas->size() =
+(6*(self.ProfesorPreviamenteEnArea.dedicacionEnPeriodo/100))
+TODO:revisar
+
+context Departamento
+inv:
+self.areas.ProfesorPreviamenteEnArea.dedicacionEnPeriodo->sum()>=1500
