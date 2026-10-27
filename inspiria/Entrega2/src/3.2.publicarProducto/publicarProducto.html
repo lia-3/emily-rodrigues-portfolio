@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>INSPIRIA-Publicar</title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+    <div class="contenedorPrincipal">
+        
+        <div class="barraOpciones">
+            <ul class="menu">
+                <li><img src="../inicio.png" class="iconoMenu"> Inicio</li>
+                <li class="activo"><img src="../mas.png" class="iconoMenu"> Publicar</li>
+                <li><img src="../crecer.png" class="iconoMenu"> Tendencias</li>
+                <li><img src="../corazon.png" class="iconoMenu"> Siguiendo</li>
+                <li><img src="../guardar.png" class="iconoMenu"> Guardados</li>
+                <li><img src="../categoria.png" class="iconoMenu"> Categorías</li>
+                <li><img src="../tematica.png" class="iconoMenu"> Temáticas</li>
+                <li><img src="../muro.png" class="iconoMenu"> Muro</li>
+            </ul>
+            <div class="contenedorLogo">
+                <img src="../logo_inspiria.png" alt="Logo Inspiria" class="imagenLogo">
+            </div>
+        </div>
+
+        <div class="contenido">
+            <div class="contenedorBusqueda">
+                <input type="text" placeholder="Buscar" class="inputBuscar">
+                <img src=" ../lupa.png" class="iconoLupa">
+                <div class="contenedorPerfil">
+                    <div class="circuloPerfil">
+                        <img src="../perfil.jpg" class="iconoPerfil" alt="Perfil">
+                    </div>
+                </div>
+            </div>
+
+            <form method="post"></form>
+                <div class="contenedorFormularioProducto">
+                    <div class="seccionFotos">
+                        <div class="subirFotos">Añadir Fotos/Vídeos</div>
+                        <div class="subidasFotos">
+                            <label>Subidos/Seleccionados <span>*</span></label>
+                            <div class="thumbnailScrollProducto">
+                                <div class="thumbnail">
+                                    <img src="../mantel.jpg" alt="imagen" class="imagen";>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clasificacion">
+                        <div class="escribirNombre">
+                            <label for="idNombre">Nombre <span>*</span></label>
+                            <textarea id="idNombre" name="nombre" readonly>Mantel</textarea>
+                        </div>
+                        <div class="escribirDescripcion">
+                            <label for="idDescripcion">Descripción <span>*</span></label>
+                            <textarea id="idDescripcion" name="descripcion" readonly>Mantel sencillo</textarea>
+                        </div>
+
+                        <div class="tematica_categoria">
+                            <label for="idCategoria">Categoría <span>*</span></label>
+                            <select id="idCategoria" name="categoria" disabled>
+                                <option>Costura</option>
+                            </select>
+                        </div>
+
+                        <div class="tematica_categoria">
+                            <label for="idTematica">Temática <span>*</span></label>
+                            <select id="idTematica" name="tematica" disabled>
+                                <option>Hogar</option>
+                            </select>
+                        </div>
+                        <div class="precio_stock">
+                            <label for="idPrecio">Precio (€) <span>*</span></label>
+                            <input type="number" placeholder="Introduce el precio del producto" value="10" id="idPrecio" name="precio">
+                        </div>
+                        <div class="precio_stock">
+                            <label for="idStock">Stock <span>*</span></label>
+                            <select id="idStock" name="stock" disabled>
+                                <option>Disponible</option>
+                            </select>
+                        <div class="accionesPublicar">
+                            <input type="reset" class="btnCancelar" value="Cancelar">
+                            <input type="submit" class="btnPublicar" value="Publicar">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

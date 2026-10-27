@@ -1,0 +1,1358 @@
+html, body {
+    height: 100%;
+}
+/*Quita márgenes por defecto e instaura la fuente de toda la página*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal que ocupa toda la pantalla */
+.contenedorPrincipal {
+    float: left; /*Para que se peque a la barra de opciones*/
+    width: 100%;
+    height: 100%;
+}
+
+/*ESTILOS INICIAL*/
+.contenedorDerechaInicial {
+    float: right;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    padding-top: 15%; /*Margen superior dentro del contenedor, para que no se pegue arriba*/
+}
+
+/*Estilo de la parte del logo y el nombre*/
+.contenedorIzquierdaInicial {
+    float: left;
+    width: 49%;
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    padding-top: 15%; /*Margen superior dentro del contenedor, para que no se pegue arriba*/
+}
+
+/* Estilos para la imagen del logo */
+.imagenLogoInicial {
+    width: 200px; /*Para ajustar el tamaño*/
+    height: auto;  /*Mantiene la proporción de la foto*/
+    margin-bottom: 30%;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+
+/* Estilo de los botones negros */
+.botonInicial {
+    display: block; /*Hace que estén uno debajo de otro*/
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px; /*Redondea los bordes de los botones*/
+    padding: 15px 40px; /*Margen para que las letras estén en el centro del botón*/
+    font-size: 1.1em;
+    width: 300px;
+    margin: 0 auto 40px auto; /*Margen de al rededor de cada botón*/
+    cursor: pointer; /*Encima de los botones el cursor es un dedo*/
+}
+
+/*Al pasar el raton se aclara el fondo*/
+.botonInical:hover {
+    background-color: #333;
+}
+
+/*ESTILOS REGISTRO*/
+.contenedorIzquierdaRegistro {
+    float: left;
+    width: 49%; 
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid #ccc; 
+    padding-top: 15%; 
+}
+
+.contenedorDerechaRegistro {
+    float: right;
+    width: 50%;
+    height: 100%;
+    padding-top: 10%;
+    padding-right: 5%;
+}
+
+
+.tarjetaRegistro {
+    width: 80%;
+    max-width: 400px;
+    text-align: left;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+
+}
+
+.inputPassword {
+    position: relative;
+    align-items: center;
+}
+
+.showBtn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    font-size: 0.8em;
+    color: #666;
+    cursor: pointer;
+}
+
+.terminos {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.85em;
+    overflow: hidden;
+}
+
+.terminos input {
+    float: left;
+    margin-right: 10px;
+    margin-top: 2px; 
+}
+
+.terminos label {
+    float: left;
+    width: calc(100% - 30px); /* El resto del espacio para el texto largo */
+}
+
+.accionesRegistrar {
+    width: 100%;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.btnRegistrar {
+    float: left; 
+    width: 48%; 
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    margin-right: 4%;
+}
+
+.btnCancelarRegistro {
+    float: left; 
+    width: 48%; 
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+.btnRegistrar:hover {
+    background-color: #333;
+}
+
+/*ESTILO PLANTILLA*/
+/*Barra de opciones*/
+.barraOpciones {
+    float: left;
+    width: 20%;
+    min-width: 200px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    padding: 20px 0;
+    position: relative;
+}
+
+.iconoMenu{
+    width: 20px;
+    height: 20px;
+    margin-right: 15 px; /*Separación con el texto*/
+    vertical-align: middle; /*Alineado vertical con el texto*/
+}
+
+.menu {
+    list-style: none; /*Elimina los puntos que aparecen antes de la lista*/
+}
+
+.menu li {
+    padding: 15px 30px; /*Margen para que las letras estén en el centro del botón*/
+    font-size: 1.2em;
+    font-weight: bold; /*Texto en negrita*/
+    cursor: pointer; /*Encima de las opciones el cursor es un dedo*/
+    white-space: nowrap; /*Para que el texto y el icono no se corten*/
+}
+
+.menu li.activo {
+    background-color: #ddd; /*Gris claro para el seleccionado*/
+}
+
+.contenedorLogo {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.imagenLogo {
+    width: 100px;
+    border: 1px solid #E8B4B8;
+}
+
+/*Contenido página principal*/
+.contenido {
+    float: right;
+    width: 80%;
+    height: 100%;
+    padding: 20px 50px;
+}
+
+.contenedorBusqueda {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.inputBuscar {
+    width: 90%;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px; /*Borde redondeado*/
+    /*TODO meter lupa??*/
+}
+
+.iconoLupa{
+    position: absolute;
+    right: 120px; /*Distancia del borde derecho*/
+    top: 50%; /**/
+    transform: translateY(-50%);
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}
+
+.contenedorPerfil {
+    float: right;
+}
+
+.circuloPerfil {
+    width: 50px;           
+    height: 50px;          
+    border-radius: 50%;    
+    overflow: hidden;      
+    border: 2px solid #ccc; 
+    display: flex;         
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; 
+}
+
+.iconoPerfil {
+    width: 100%;          
+    height: 100%;       
+    object-fit: cover;     
+    object-position: center;
+    display: block;       
+}
+
+/*ESTILO PRINCIPAL*/
+h2 {
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+/*Podio*/
+.contenedorPodio {
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.puesto-2 {
+    float: left;
+    margin: 0 5px;
+    width: 30%;
+    background-color: #666; /* Gris oscuro */
+    background-image: url('ceramica.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 180px;
+    margin-top: 50px; /*Altura más baja que la 1 */
+}
+
+.puesto-1 {
+    float: left;
+    margin: 0 5px;
+    width: 30%;
+    background-color: #000; 
+    background-image: url('costura.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 230px;
+}
+
+.puesto-3 {
+    float: left;
+    margin: 0 5px;
+    width: 30%;
+    background-color: #ccc; 
+    background-image: url('crochet.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 150px;
+    margin-top: 80px; /*Altura más baja*/
+}
+
+.numeroPosicion {
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.cajaCategoria {
+    background-color: #eee;
+    width: 80%;
+    height: 80px;
+    margin: 20px auto;
+    border-radius: 10px;
+    line-height: 80px; /*Centra el texto verticalmente*/
+}
+
+/* Lista tendencias no podio */
+.elementoLista {
+    width: 100%;
+    height: 35px;
+    background-color: #ccc;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding-left: 10px;
+    line-height: 35px;
+}
+
+/*ESTILO PUBLICAR*/
+.contenedorIzquierdaPublicar {
+    float: left;
+    width: 49%;
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    padding-top: 15%;
+}
+
+.contenedorDerechaPublicar {
+    float: right;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    padding-top: 15%;
+}
+
+.imagenSeccion {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.botonPantallaPublicar {
+    display: block;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    width: 300px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.botonPantallaPublicar:hover {
+    background-color: #333;
+}
+
+/*ESTILO PUBLICAR PRODUCTO*/
+/* Cuerpo */
+.contenedorFormularioProducto {
+    width: 100%;
+    padding: 32px 40px;
+    overflow: hidden;
+}
+
+/* Columna izquierda */
+.seccionFotos {
+    float: left;
+    width: 60%;
+}
+
+.subirFotos {
+    width: 100%;
+    height: 250px; /* Con float hay que definir alturas si no hay contenido */
+    border: 1.5px dashed #bbb;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 250px; /* Centra el texto verticalmente */
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.subidasFotos {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.subidasFotos > label {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #222;
+}
+
+label span { color: #c00; }
+
+
+.thumbnailScrollProducto {
+    width: 25%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px;
+    overflow: hidden;
+}
+
+.thumbnail {
+    float: left; /* Cada cuadrito flota a la izquierda */
+    width: 90px;
+    height: 90px;
+    background: #eee;
+    border-radius: 4px;
+    margin: 5px; /* Espacio entre cuadros (sustituye al gap) */
+    text-align: center;
+    line-height: 90px;
+}
+
+.imagen{
+    width: 100%; 
+    height: auto; 
+    border-radius: 4px;
+}
+
+/* Columna derecha */
+.clasificacion{
+    float: right;
+    width: 38%;
+    padding-left: 20px;
+}
+
+.escribirNombre {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.escribirNombre textarea {
+    float:right;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    resize: none;
+    font-family: Arial, sans-serif;
+    outline: none;
+    color: #555;
+}
+
+.escribirDescripcion {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.escribirDescripcion label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.escribirDescripcion textarea {
+    float:right;
+    display: block;
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    resize: none;
+    font-family: Arial, sans-serif;
+    outline: none;
+    color: #555;
+}
+
+.tematica_categoria {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.precio_stock{
+    width:100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.precio_stock #idPrecio {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+label {
+    display:block;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    background-color: #fff;
+    color:#888;
+    appearance: none;
+    pointer-events: none;
+    outline: none;
+}
+
+.accionesPublicar{
+    float: right;
+    margin-bottom: 20px;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btnCancelar {
+    float: left; /* Para que los botones se pongan uno al lado del otro */
+    margin-left: 12px;
+    background-color: #e0e0e0;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 28px;
+    font-size: 0.95em;
+}
+
+.btnPublicar {
+    float: left; 
+    margin-left: 12px;
+    background-color: #e0e0e0;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 24px;
+    font-size: 0.95em;
+    font-weight: bold;
+    align-items: center;
+}
+
+/*ESTILO PUBLICAR TUTORIAL*/
+.thumbnailScrollTutorial {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px;
+    overflow: hidden;
+}
+
+.btnSiguiente {
+    float: left; 
+    margin-left: 12px;
+    background-color: #e0e0e0;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 24px;
+    font-size: 0.95em;
+    font-weight: bold;
+    align-items: center;
+}
+
+/*ESTILO MATERIALES HERRAMIENTAS PASOS*/
+.seccionMaterialesHerramientas{
+    float: left;
+    width: 45%;
+    padding-left: 20px;
+}
+
+.escribirMaterialesHerramientas {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.escribirMaterialesHerramientas label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.escribirMaterialesHerramientas textarea {
+    float:right;
+    display: block;
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    resize: none;
+    font-family: Arial, sans-serif;
+    outline: none;
+    color: #555;
+}
+.seccionPasos{
+    float: right;
+    width: 45%;
+}
+.escribirPasos {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding-right: 20px;
+
+}
+
+.escribirPasos label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.escribirPasos textarea {
+    float:right;
+    display: block;
+    width: 100%;
+    height: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    resize: none;
+    font-family: Arial, sans-serif;
+    outline: none;
+    color: #555;
+}
+
+.dificultad {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.grupoElegirProducto {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden; /* Limpiador para que el contenedor rodee a los flotantes */
+}
+
+.grupoElegirProducto p {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    width: 100%; /* El párrafo ocupa toda la línea superior */
+}
+
+.grupoElegirProducto p span {
+    color: #c00; /* El asterisco en rojo */
+}
+
+/* Estilo para los circulitos */
+.grupoElegirProducto input[type="radio"] {
+    float: left;
+    margin-top: 5px;   /* Ajuste fino para que el círculo se alinee con el texto */
+    margin-right: 5px; /* Espacio entre el círculo y su palabra (Si/No) */
+    cursor: pointer;
+}
+
+.grupoElegirProducto label {
+    float: left;
+    margin-right: 20px; 
+    font-size: 0.95em;
+    cursor: pointer;
+}
+
+/*ESTILO ENTRADA TUTORIAL*/
+.imagenTutorial{
+    float: left;
+    width: 400px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5%;
+}
+
+/*ESTILO ENTRADA PRODUCTO*/
+
+.seccionFotos{
+    float: left;
+    width: 45%;
+    overflow: hidden;
+}
+.imagenProducto{
+    width: 600px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5%;
+}
+h4{
+    font-size: 3em;
+    margin-bottom: 5px;
+    color: #000;
+}
+.informacionProducto {
+    float: right;
+    width: 45%;
+    overflow: hidden; 
+    margin-top: 100px;
+}
+
+.seccionTexto {
+    width: 100%;
+    float: left; /*Mantiene la estructura de bloques uno bajo otro*/
+    margin-bottom: 20px; /*Espacio entre secciones*/
+}
+
+.seccionTexto label {
+    display: block; /*Obliga al texto <p> a empezar debajo*/
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 5px; /*Espacio entre el título y su descripción*/
+}
+
+.seccionTexto p {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.4; /* Para descripciones largas */
+}
+
+/*ESTILO EDITAR PERFIL*/
+.iconoPerfil {
+    width: 100%;          
+    height: 100%;       
+    object-fit: cover;     
+    object-position: center;
+    display: block;       
+}
+
+.tituloConfiguracion {
+    font-size: 2em;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-align: left;
+    clear: both; 
+}
+
+/* pone la tarjeta y los botones uno al lado del otro */
+.contenedorConfiguracion {
+    width: 100%;
+    margin-top: 20px;
+    overflow: hidden; 
+}
+
+/* Tarjeta que contiene los datos del usuario */
+.tarjetaPerfil {
+    float: left; 
+    width: 50%;
+    min-width: 400px;
+    border: 1px solid #f0f0f0; 
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); 
+}
+
+/* Cuadrado gris para la foto de perfil */
+.fotoPerfilPlaceholder {
+    width: 150px;
+    height: 150px;
+    background-color: #ebebeb;
+    margin: 0 auto 40px auto; 
+    text-align: center; 
+    line-height: 150px; 
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.iconoPlaceholder {
+    width: 40px;
+    height: auto;
+    opacity: 0.5;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Estilos de los textos dentro de la tarjeta */
+.infoPerfil h3 {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.infoPerfil p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.4; 
+}
+
+/* Contenedor de los botones derechos */
+.seccionBotonesConfig {
+    float: left; /* Flota al lado de la tarjeta */
+    margin-left: 80px; 
+    padding-top: 40px; 
+}
+
+/* Botones grises de configuración */
+.botonConfig {
+    display: block; /* Uno debajo de otro */
+    background-color: #d1d1d1;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 1em;
+    width: 250px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 60px; 
+    transition: background-color 0.2s; 
+}
+
+.botonConfig:last-child {
+    margin-bottom: 0;
+}
+
+.botonConfig:hover {
+    background-color: #b8b8b8;
+}
+
+.imagenPerfilGrande {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/*ESTILO CAMBIAR FOTO*/
+.tituloSeccion {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 40px;
+    clear: both;
+}
+
+.flexContenedor {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.columna {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.flexContenedor::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.subtitulo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.cuadroFoto {
+    width: 180px;
+    height: 180px;
+    background-color: #eee;
+    margin: 0 auto 40px auto; 
+    border: 1px solid #ccc;
+    overflow: hidden; 
+    line-height: 180px; 
+    display: block;
+}
+
+.cuadroFoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+    vertical-align: middle; 
+}
+
+.cuadroFoto.discontinuo {
+    border: 2px dashed #aaa;
+    background-color: transparent;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #666;
+    display: block;
+    line-height: normal; 
+}
+
+.cuadroFoto.discontinuo span, 
+.cuadroFoto.discontinuo .imgPlaceholder {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.imgPlaceholder {
+    width: 60px;
+    height: 60px;
+    opacity: 0.4;
+    margin-top: 40px; 
+}
+
+.botonGris {
+    background-color: #ccc;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    display: inline-block;
+}
+
+.botonGris:hover {
+    background-color: #bbb;
+}
+
+.grupoActualizar {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.grupoActualizar .botonGris {
+    margin: 0 10px;
+}
+
+/*ESTILO CAMBIAR NOMBRE*/
+
+.contenedorFormularioCentrado {
+    width: 100%;
+    max-width: 500px; /* Ancho máximo del recuadro */
+    margin: 0 auto; /* Centrado horizontal */
+    background-color: #fff; /* O un gris muy leve si prefieres */
+    padding: 40px;
+    border: 1px solid #eee; /* Borde sutil como en el boceto */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra suave opcional */
+}
+
+/* Estilos para cada grupo de etiqueta + input */
+.grupoFormulario {
+    margin-bottom: 25px; /* Espacio entre campos */
+}
+
+/* Etiquetas de los inputs */
+.grupoFormulario label {
+    display: block; /* Ocupa todo el ancho */
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Estilo base para los inputs del formulario */
+.inputFormulario {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #555;
+    background-color: #fff;
+}
+
+/* Estilo para el input de solo lectura (Nombre Actual) */
+.inputSoloLectura {
+    background-color: #f9f9f9; /* Grisáceo para indicar que no se edita */
+    color: #777;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+
+
+
+
+/* Contenedor de botones (Cambiado de flexbox a floats) */
+.contenedorBotones {
+    margin-top: 30px;
+    width: 100%;
+    /* Limpiamos el float para que el contenedor mantenga su altura */
+    overflow: hidden; 
+}
+
+/* Estilo base para botones */
+.contenedorBotones button {
+    padding: 10px 25px;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+/* Botón Cancelar (Alineado a la izquierda con float) */
+.botonSecundario {
+    float: left;
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.botonSecundario:hover {
+    background-color: #d0d0d0;
+}
+
+/* Botón Aceptar (Alineado a la derecha con float) */
+.botonPrincipal {
+    float: right;
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.botonPrincipal:hover {
+    background-color: #d0d0d0;
+}
+
+/*ESTILO EDITAR CONTRASEÑA*/
+
+/* FORMULARIO: Centrado mediante Inline-Block y Text-Align */
+.contenedorFormularioContraseña {
+    text-align: center; /* Centra elementos inline-block horizontalmente */
+    width: 100%;
+}
+
+.tarjetaFormulario {
+    display: inline-block; /* Permite que se centre con el text-align del padre */
+    text-align: left;      /* Resetea la alineación del texto a la izquierda */
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.boton-cancelar {
+    float: left;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #e0e0e0;
+}
+
+.boton-aceptar {
+    float: right;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #d0d0d0;
+}
+
+.boton-cancelar:hover, .btn-aceptar:hover {
+    filter: brightness(0.92);
+}
+
+/*ESTILO PERFIL*/
+
+.infoPerfil {
+    margin-bottom: 40px;
+    overflow: hidden; 
+}
+
+.avatarGrande {
+    float: left; 
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #eee;
+    object-fit: cover;
+    margin-right: 30px; 
+}
+
+.datosUsuario {
+    float: left; 
+    width: calc(100% - 300px); 
+}
+
+.datosUsuario h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/*Botones de acción*/
+.botonesAccion {
+    float: right;
+    width: 150px;
+}
+
+.botonesGris {
+    display: block; 
+    width: 100%;
+    margin-bottom: 10px; 
+    background-color: #ddd;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pestanas {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.ventana {
+    display: inline-block; 
+    margin-right: 15px; 
+    padding: 10px 25px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background: white;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    vertical-align: bottom;
+}
+
+.ventana.activo {
+    background-color: #ddd;
+}
+
+.mallaPublicaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    clear: both; 
+}
+
+.post {
+    border: 1px solid #eee;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.postImagen {
+    width: 100%;
+    height: 200px;
+    background-color: #eee;
+    text-align: center; 
+    line-height: 200px; 
+    overflow: hidden;
+    font-size: 0; 
+}
+
+.postImagen img {
+    display: inline-block;
+    vertical-align: middle; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que rellene el 200x200 sin estirarse */
+    line-height: normal; 
+}
+
+.avatarGrande {
+    float: left;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #eee;
+    margin-right: 30px;
+    object-fit: cover; 
+    display: block;
+}
+
+.infoPerfil::after, .pestanas::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.postInfo {
+    padding: 15px;
+    position: relative;
+}
+
+.postInfo h3 {
+    margin-bottom: 5px;
+}
+
+.postInfo p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.iconosPost {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+.iconosPost img {
+    width: 20px;
+    opacity: 0.6;
+    display: inline-block;
+    margin-left: 10px; 
+}
+
+/*ESTILO MURO*/
+
+.muro-cuadricula {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    gap: 20px; /* Espacio entre posts */
+    margin-top: 20px;
+}
+
+.postMuro {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f9f9f9;
+    display: block; 
+}
+
+.post-cabecera {
+    padding: 10px;
+    background: #eee;
+    font-weight: bold;
+    overflow: hidden; 
+}
+
+.mini-perfil {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    float: left; 
+}
+
+.post-cabecera span {
+    line-height: 30px; 
+    margin-left: 10px;
+}
+
+.post-media {
+    position: relative;
+    background: #e0e0e0;
+    aspect-ratio: 1 / 1; 
+    text-align: center; 
+}
+
+.post-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-top {
+    overflow: hidden; 
+    margin-bottom: 5px;
+}
+
+.post-titulo {
+    font-size: 1.1em;
+    margin: 0;
+    float: left; /*Título a la izquierda*/
+}
+
+.acciones-derecha {
+    float: right; /*Contenedor de iconos a la derecha*/
+}
+
+.icono-accion {
+    width: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.post-info {
+    font-size: 0.8em;
+    color: #666;
+    margin: 10px 0;
+    clear: both; 
+}
+
+.post-desc {
+    font-size: 0.9em;
+}
+
+/* ... (Media queries del final se mantienen igual) ... */
+
+/* Ajuste Responsivo: si la pantalla es pequeña, pasar a 1 o 2 columnas */
+@media (max-width: 1000px) {
+    .muro-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .muro-grid { grid-template-columns: 1fr; }
+}

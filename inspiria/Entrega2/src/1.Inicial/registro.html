@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>INSPIRIA - Registro</title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+    <div class="contenedorPrincipal flex-container">
+        <div class="contenedorIzquierdaRegistro">
+            <img src="../logo_inspiria.png" alt="Logo Inspiria" class="imagenLogoInicial">
+            <h1>INSPIRIA</h1>
+        </div>
+
+        <div class="contenedorDerechaRegistro">
+            <div class="tarjetaRegistro">
+                <form>
+                    <div class="campo">
+                        <label>Nombre de Usuario</label>
+                        <input type="text" name="usuario" value="Maria Perez">
+                    </div>
+
+                    <div class="campo">
+                        <label>Correo</label>
+                        <input type="email" placeholder="your@email.com" value="mariaperez@email.com">
+                    </div>
+
+                    <div class="campo">
+                        <label>Contraseña</label>
+                        <div class="inputPassword">
+                            <input type="password" value="Contraseña">
+                            <span class="showBtn">Mostrar</span>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label>Repetir contraseña</label>
+                        <div class="inputPassword">
+                            <input type="password" value="Contraseña">
+                            <span class="showBtn">Mostrar</span>
+                        </div>
+                    </div>
+
+                    <div class="terminos">
+                        <input type="checkbox" id="tos" checked>
+                        <label for="tos">Acepto los términos y condiciones de servicio</label>
+                    </div>
+
+                    <div class="accionesRegistrar">
+                        <button type="button" class="btnCancelarRegistro">Cancelar</button>
+                        <button type="submit" class="btnRegistrar">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

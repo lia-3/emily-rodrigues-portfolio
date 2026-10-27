@@ -1,0 +1,10 @@
+# ficheros
+*.png.bak
+*.jpg.bak
+*.jpeg.bak
+*.lock
+Prueba*.java
+
+# carpetas
+**/target/
+**/META-INF/context.xml

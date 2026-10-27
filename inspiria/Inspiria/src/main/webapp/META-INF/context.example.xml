@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/Inspiria">
+    <Resource 
+        name="jdbc/inspiria" 
+        auth="Container" 
+        type="javax.sql.DataSource"
+        minIdle="2" 
+        maxIdle="10"
+        maxWaitMillis="10000" 
+        maxTotal="20"
+        username="root" 
+        password=""
+        driverClassName="org.mariadb.jdbc.Driver" 
+        url="jdbc:mariadb://localhost:3306/inspiria"/>
+</Context>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>INSPIRIA-Publicar</title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+    <div class="contenedorPrincipal">
+        
+        <div class="barraOpciones">
+            <ul class="menu">
+                <li><img src="../inicio.png" class="iconoMenu"> Inicio</li>
+                <li class="activo"><img src="../mas.png" class="iconoMenu"> Publicar</li>
+                <li><img src="../crecer.png" class="iconoMenu"> Tendencias</li>
+                <li><img src="../corazon.png" class="iconoMenu"> Siguiendo</li>
+                <li><img src="../guardar.png" class="iconoMenu"> Guardados</li>
+                <li><img src="../categoria.png" class="iconoMenu"> Categorías</li>
+                <li><img src="../tematica.png" class="iconoMenu"> Temáticas</li>
+                <li><img src="../muro.png" class="iconoMenu"> Muro</li>
+            </ul>
+            <div class="contenedorLogo">
+                <img src="../logo_inspiria.png" alt="Logo Inspiria" class="imagenLogo">
+            </div>
+        </div>
+
+        <div class="contenido">
+            <div class="contenedorBusqueda">
+                <input type="text" placeholder="Buscar" class="inputBuscar">
+                <img src=" ../lupa.png" class="iconoLupa">
+                <div class="contenedorPerfil">
+                    <div class="circuloPerfil">
+                        <img src="../perfil.jpg" class="iconoPerfil" alt="Perfil">
+                    </div>
+                </div>
+            </div>
+            <div class="seccionMaterialesHerramientas">
+                <div class="escribirMaterialesHerramientas">
+                    <label for="idMateriales">Materiales</label>
+                    <textarea id="idMateriales" name="materiales" readonly>Arcilla (https/amazon.es/arcilla)
+Introduce más materiales...
+                    </textarea>
+                </div>
+                <div class="escribirMaterialesHerramientas">
+                    <label for="idHerramientas">Herramientas</label>
+                    <textarea id="idHerramientas" name="herramientas" readonly>Cuchillo de arcilla (https/amazon.es/cuchilloDeArcilla)
+Introduce más herramientas...
+                    </textarea>
+                </div>
+            </div>
+            <div class="seccionPasos">
+                <div class="escribirPasos">
+                    <label for="idPasos">Pasos</label>
+                    <textarea id="idPasos" name="pasos" readonly>Paso 1: amasar la arcilla para ablandarla
+Paso 2: separar un trozo para hacer los detalles
+Paso 3: modelar la arcilla con la forma que queremos de base
+Paso 4: cogemos lo que hemos reservado y modelamos los detalles
+Paso 5: los juntamos a la base con (una masa de pegar arcilla que no me acuerdo como se llama)
+Paso 6: dejar secar 1 día y pintar a gusto
+                    </textarea>
+                </div>
+                <div class="dificultad">
+                    <label for="idDificultad">Dificultad <span>*</span></label>
+                    <select id="idDificultad" name="dificultad" disabled>
+                        <option>Media</option>
+                    </select>
+                </div>
+                <div class="grupoElegirProducto">
+                    <p>¿Quieres publicarlo también como producto? <span>*</span></p>
+
+                    <input type="radio" id="radioButtonNoProducto" name="elegirProducto" value="no" >
+                    <label for="radioButtonNoProducto">No</label>
+                    <input type="radio" id="radioButtonSiProducto" name="elegirProducto" value="si" checked>
+                    <label for="radioButtonSiProducto">Si</label>
+                </div>
+                <div class="precio_stock">
+                    <label for="idPrecio">Precio (€) <span>*</span></label>
+                    <input type="number" placeholder="Introduce el precio del producto" value="20" id="idPrecio" name="precio">
+                </div>
+                <div class="precio_stock">
+                    <label for="idStock">Stock <span>*</span></label>
+                    <select id="idStock" name="stock" disabled>
+                        <option>Disponible</option>
+                    </select>
+                <div class="accionesPublicar">
+                    <input type="reset" class="btnCancelar" value="Cancelar">
+                    <input type="submit" class="btnPublicar" value="Publicar">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
