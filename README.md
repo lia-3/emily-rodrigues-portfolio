@@ -25,7 +25,7 @@ Estudiante de 4º de Ingeniería Informática en la Universidad de Valladolid (U
 - **[Sistema de alquiler de bicicletas](./Sistema-alquiler-bicicletas)** · *Tecnologías para el Desarrollo de Software*
   Backend en Java para una red urbana de alquiler de bicicletas, con estaciones, rutas y sistema de recompensas. Desarrollado en tres iteraciones ágiles: lógica de negocio, patrón Repository con gestores en aislamiento y persistencia con Hibernate. Incluye pruebas con JUnit, pipeline en GitLab CI/CD y análisis de *code smells* con SonarQube, además de refactorizaciones del catálogo de Fowler.
   `Java` `Hibernate` `JUnit` `GitLab CI/CD` `SonarQube`
-  Para saber más: [Contexto del sistema de alquiler de bicletas](./sistema-alquiler-bicicletas/Contexto.md)
+  Para saber más: [Contexto del sistema de alquiler de bicletas](./Sistema-alquiler-bicicletas/Contexto.md)
 
 - **[Sistema TCONN-ACME: implementación](./dise%C3%B1o-sistemas-tconn)** · *Diseño de Sistemas Software*
   Implementación de parte de los subsistemas de gestión y soporte técnico de una empresa de telecomunicaciones, entregada en cuatro *releases* (identificarse, cambiar disponibilidad, consultar incidencias, atender llamada). Aplicación de escritorio con Java Swing y PostgreSQL por JDBC, con un plan de **pruebas de aceptación** por release y scripts SQL para poblar los datos de cada prueba.
@@ -35,19 +35,19 @@ Estudiante de 4º de Ingeniería Informática en la Universidad de Valladolid (U
 - **[Sistema de logística global](./Sistema-logistica-global)** · *Programación Orientada a Objetos*
   Backend en Java para modelar puertos, muelles, contenedores y trayectos de una empresa logística ficticia. Jerarquías de clases y clases abstractas (contenedores estándar, refrigerados y *flat rack*; trayectos simples y combinados), con pruebas unitarias en JUnit 4, principios SOLID y documentación con JavaDoc.
   `Java` `JUnit 4` `SOLID` `JavaDoc`
-  Para saber más: [Contexto del sistema de logística global](./sistema-logistica-global/Contexto.md)
+  Para saber más: [Contexto del sistema de logística global](./Sistema-logistica-global/Contexto.md)
 
 ### Pruebas de carga y monitorización
 
 - **[Pruebas de carga y monitorización web](./Monitorizacion-pagina-web)** · *Evaluación y Rendimiento de Sistemas Software*
   Tienda online en Flask con API REST, sometida a pruebas de carga con Locust (de 20 a 500 usuarios virtuales simultáneos) para localizar cuellos de botella. Las métricas del sistema se recogen con `psutil`, se guardan en MySQL y se visualizan en dashboards de Grafana.
   `Python` `Flask` `Locust` `Grafana` `MySQL`
-  Para saber más: [Contexto de las pruebas de carga y monitorización web](./monitorizacion-pagina-web/Contexto.md)
+  Para saber más: [Contexto de las pruebas de carga y monitorización web](./Monitorizacion-pagina-web/Contexto.md)
 
 - **[Monitorización de rendimiento local](./Monitorizacion-sistema-local)** · *Evaluación y Rendimiento de Sistemas Software*
   Sistema que recoge automáticamente las métricas de una máquina virtual (CPU, memoria, red y disco) con la librería OSHI, las programa con un servicio y un temporizador de systemd, las guarda en MySQL y las muestra en Grafana.
   `Bash` `OSHI` `systemd` `MySQL` `Grafana`
-  Para saber más: [Contexto de la monitorización del rendimiento local](./monitorizacion-sistema-local/Contexto.md)
+  Para saber más: [Contexto de la monitorización del rendimiento local](./Monitorizacion-sistema-local/Contexto.md)
 
 ### Bases de datos y desarrollo web
 

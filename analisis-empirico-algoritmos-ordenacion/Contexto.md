@@ -1,4 +1,4 @@
-# Análisis Empírico de Algoritmos de Ordenación (ADA - Práctica 1)
+# Análisis Empírico de Algoritmos de Ordenación
 
 ## Contexto del Proyecto
 Este proyecto fue desarrollado en equipo como parte de la asignatura de **Análisis y Diseño de Algoritmos (ADA)** 

@@ -1,4 +1,4 @@
-# Analizador Léxico de OCL con Lex (Lenguajes de Programación)
+# Analizador Léxico de OCL con Lex 
 
 ## Contexto del Proyecto
 Este proyecto fue desarrollado en equipo como parte de la asignatura de **Lenguajes de Programación (LP)** 

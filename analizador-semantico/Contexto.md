@@ -1,4 +1,4 @@
-# Analizador Semántico y Traductor de Modelos con ANTLR-4 (Lenguajes de Programación)
+# Analizador Semántico y Traductor de Modelos con ANTLR-4
 
 ## Contexto del Proyecto
 Este proyecto fue desarrollado en equipo como parte de la asignatura de **Lenguajes de Programación (LP)** 

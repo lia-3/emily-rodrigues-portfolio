@@ -1,4 +1,4 @@
-# Analizador Léxico y Sintáctico de OCL con Lex y Yacc (Lenguajes de Programación)
+# Analizador Léxico y Sintáctico de OCL con Lex y Yacc 
 
 ## Contexto del Proyecto
 Este proyecto fue desarrollado en equipo como parte de la asignatura de **Lenguajes de Programación (LP)**
